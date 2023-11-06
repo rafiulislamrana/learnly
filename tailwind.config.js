@@ -5,8 +5,20 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        space: '\'Space Grotesk\', sans-serif',
+      },
+      colors: {
+        primary: '#0059b3',
+        secondary: '#34A853',
+        button: '#FFA500',
+      }
+    },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: [],
+  },
 }
 
