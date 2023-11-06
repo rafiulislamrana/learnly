@@ -10,6 +10,8 @@ import Error from './components/shared/Error/Error.jsx';
 import Home from './components/pages/Home/Home.jsx';
 import AddAssigment from './components/pages/AddAssigment/AddAssigment.jsx';
 import UpdateAssignment from './components/pages/UpdateAssignment/UpdateAssignment.jsx';
+import Login from './components/pages/Login/Login.jsx';
+import Registration from './components/pages/Registration/Registration.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: "/update-assignment",
         element: <UpdateAssignment></UpdateAssignment>
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
+      },
+      {
+        path: "/registration",
+        element: <Registration></Registration>
       }
     ]
   },
