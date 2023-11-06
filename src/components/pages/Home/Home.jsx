@@ -16,6 +16,53 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
+            <div className=" py-16">
+                <div className="max-w-3xl mx-auto">
+                    <h2 className="text-5xl font-space font-extrabold">FAQ</h2>
+                    <div className="pt-8">
+                        <div className="collapse collapse-arrow border-y rounded-none border-black">
+                            <input type="radio" name="my-accordion-2" checked="checked" />
+                            <div className="collapse-title font-space text-2xl font-medium text-left">
+                                Click to open this one and close others
+                            </div>
+                            <div className="collapse-content text-left">
+                                <p>hello</p>
+                            </div>
+                        </div>
+                        
+                        <div className="collapse collapse-arrow border-b rounded-none border-black">
+                            <input type="radio" name="my-accordion-2" checked="checked" />
+                            <div className="collapse-title font-space text-2xl font-medium text-left">
+                                Click to open this one and close others
+                            </div>
+                            <div className="collapse-content text-left">
+                                <p>hello</p>
+                            </div>
+                        </div>
+
+                        <div className="collapse collapse-arrow border-b rounded-none border-black">
+                            <input type="radio" name="my-accordion-2" checked="checked" />
+                            <div className="collapse-title font-space text-2xl font-medium text-left">
+                                Click to open this one and close others
+                            </div>
+                            <div className="collapse-content text-left">
+                                <p>hello</p>
+                            </div>
+                        </div>
+
+                        <div className="collapse collapse-arrow border-b rounded-none border-black">
+                            <input type="radio" name="my-accordion-2" checked="checked" />
+                            <div className="collapse-title font-space text-2xl font-medium text-left">
+                                Click to open this one and close others
+                            </div>
+                            <div className="collapse-content text-left">
+                                <p>hello</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
