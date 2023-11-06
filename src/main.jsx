@@ -9,6 +9,7 @@ import './index.css'
 import Error from './components/shared/Error/Error.jsx';
 import Home from './components/pages/Home/Home.jsx';
 import AddAssigment from './components/pages/AddAssigment/AddAssigment.jsx';
+import UpdateAssignment from './components/pages/UpdateAssignment/UpdateAssignment.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/add-assignment",
         element: <AddAssigment></AddAssigment>
+      },
+      {
+        path: "/update-assignment",
+        element: <UpdateAssignment></UpdateAssignment>
       }
     ]
   },
