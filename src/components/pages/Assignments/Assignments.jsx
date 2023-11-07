@@ -4,13 +4,26 @@ import AssignmentCard from "../Home/AssignmentCard";
 
 
 const Assignments = () => {
-    const [assignment, setAssignment] = useState([])
+    const [assignment, setAssignment] = useState([]);
+    const [count, setCount] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+    const viewCount = 6;
+
+    const numOfPages = Math.ceil(count/viewCount)
+
+    const pages = [...Array(numOfPages).keys()];
+    console.log(pages)
+
     useEffect(() => {
-        axios.get("http://localhost:5000/assignments")
+        axios.get(`http://localhost:5000/assignmentsPage?page=${currentPage}&size=${viewCount}`)
             .then(res => {
                 setAssignment(res.data.reverse())
             })
-    }, [])
+
+        axios.get("http://localhost:5000/assignment-count")
+        .then(res => setCount(res.data.count))
+    }, [currentPage])
+    console.log(currentPage)
     return (
         <div>
             <div className="bg-primary">
@@ -27,6 +40,11 @@ const Assignments = () => {
                 <div className="grid grid-cols-3 gap-5 ">
                     {
                         assignment.map(card => <AssignmentCard key={card._id} card={card}></AssignmentCard>)
+                    }
+                </div>
+                <div className="flex gap-2 justify-center py-10">
+                    {
+                        pages.map((page, idx) => <button className="px-4 rounded py-1 bg-primary text-white" onClick={() => setCurrentPage(page)} key={idx}>{page + 1}</button>)
                     }
                 </div>
             </div>

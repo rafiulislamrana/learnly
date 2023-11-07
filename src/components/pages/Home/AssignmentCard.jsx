@@ -8,7 +8,7 @@ const AssignmentCard = ({ card }) => {
             <figure><img src={card.imgURL} alt="Shoes" /></figure>
             <div className="card-body">
                 <div className="badge badge-outline">{difficulty}</div>
-                <h2 className="card-title font-space text-2xl">{title}</h2>
+                <h2 className="card-title text-left font-space text-2xl">{title}</h2>
                 <p className="text-left max-w-fit">Subject: {subject}</p>
                 <p className="text-left max-w-fit">Marks: {marks}</p>
                 {/* <p className="text-left max-w-fit">Difficulty: </p> */}
