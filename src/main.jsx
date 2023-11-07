@@ -14,6 +14,7 @@ import Login from './components/pages/Login/Login.jsx';
 import Registration from './components/pages/Registration/Registration.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import PrivateRoute from './routes/PrivateRoute/PrivateRoute.jsx';
+import SingleAssignment from './components/pages/SingleAssignmenta/SingleAssignment.jsx';
 
 
 const router = createBrowserRouter([
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/registration",
         element: <Registration></Registration>
+      },
+      {
+        path: "/assignment/:id",
+        element: <SingleAssignment></SingleAssignment>
       }
     ]
   },
