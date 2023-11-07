@@ -9,8 +9,7 @@ const Home = () => {
     useEffect(() => {
         axios.get("http://localhost:5000/assignments")
             .then(res => {
-                const three = res.data.slice(0,3);
-                setAssignment(three)
+                setAssignment(res.data.reverse().slice(0,3))
             })
     }, [])
 
@@ -38,7 +37,7 @@ const Home = () => {
                         assignment.map(card => <AssignmentCard key={card._id} card={card}></AssignmentCard>)
                     }
                 </div>
-                <Link to="/registration"><button className="text-xl bg-primary px-5 py-2 mt-8 rounded text-white font-space">View All</button></Link>
+                <Link to="/assignments"><button className="text-xl bg-primary px-5 py-2 mt-8 rounded text-white font-space">View All</button></Link>
             </div>
 
             <div className=" py-16">

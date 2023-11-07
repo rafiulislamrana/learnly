@@ -15,6 +15,7 @@ import Registration from './components/pages/Registration/Registration.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import PrivateRoute from './routes/PrivateRoute/PrivateRoute.jsx';
 import SingleAssignment from './components/pages/SingleAssignmenta/SingleAssignment.jsx';
+import Assignments from './components/pages/Assignments/Assignments.jsx';
 
 
 const router = createBrowserRouter([
@@ -28,8 +29,8 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/assignment",
-        element: <h1>Hiii</h1>
+        path: "/assignments",
+        element: <Assignments></Assignments>
       },
       {
         path: "/add-assignment",
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/assignment/:id",
-        element: <SingleAssignment></SingleAssignment>
+        element: <PrivateRoute><SingleAssignment></SingleAssignment></PrivateRoute>
       }
     ]
   },
