@@ -3,22 +3,30 @@ import { AiOutlineGoogle } from "react-icons/ai";
 // import { AuthContext } from "../../Providers/AuthProvide";
 // import { useContext } from "react";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 
 const Login = () => {
+
+    const { login, err, setErr } = useContext(AuthContext)
+    const location = useLocation()
+    const navigateUser = useNavigate()
+
     const handleLogin = e => {
         e.preventDefault();
-        // setErr("");
+        setErr("");
         const form = new FormData(e.currentTarget);
         const email = form.get('email');
         const password = form.get('password');
 
-        // login(email, password)
-        //     .then(res => {
-        //         Swal.fire('You Logged in Successfully!');
-        //         navigateUser(location?.state ? location.state : "/");
-        //     })
-        //     .catch(err => setErr(err.message));
+        login(email, password)
+            .then(res => {
+                Swal.fire('You Logged in Successfully!');
+                console.log(res)
+                navigateUser(location?.state ? location.state : "/");
+            })
+            .catch(err => setErr(err.message));
     }
     return (
         <div>
@@ -46,9 +54,9 @@ const Login = () => {
                                 </label>
                             </div>
                             <label className="bg-white label label-text-alt pb-8 rounded-b-xl text-red-500">
-                                {/* {
+                                {
                                     err
-                                } */}
+                                }
                             </label>
                             <div className="form-control">
                                 <button className="btn btn-primary">Login</button>

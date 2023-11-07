@@ -3,8 +3,12 @@ import { AiOutlineGoogle } from "react-icons/ai";
 // import { AuthContext } from "../../Providers/AuthProvide";
 // import { useContext } from "react";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Registration = () => {
+
+    const { createUser, update, err, setErr } = useContext(AuthContext)
 
     const handleRegistration = e => {
         e.preventDefault();
@@ -15,24 +19,24 @@ const Registration = () => {
         const password = form.get('password');
         const url = form.get('url')
 
-        // if (!/[A-Z]/.test(password)) {
-        //     return setErr("Use atleast one uppercase in your password");
-        // }
-        // if (!/[!@#$%^&*]/.test(password)) {
-        //     return setErr("Use atleast one special character in your password");
-        // }
+        if (!/[A-Z]/.test(password)) {
+            return setErr("Use atleast one uppercase in your password");
+        }
+        if (!/[!@#$%^&*]/.test(password)) {
+            return setErr("Use atleast one special character in your password");
+        }
 
-        // createUser(email, password)
-        //     .then(res => {
-        //         // toast("Your Account Created Successfully!");
+        createUser(email, password)
+            .then(res => {
+                Swal.fire('Your Account Created Successfully!!');
 
-        //         if (!res.user.displayName) {
-        //             update(name, url)
-        //                 .then(res => console.log(res))
-        //                 .catch(err => console.log(err));
-        //         }
-        //     })
-        //     .catch(err => setErr(err.message));
+                if (!res.user.displayName) {
+                    update(name, url)
+                        .then(res => console.log(res))
+                        .catch(err => console.log(err));
+                }
+            })
+            .catch(err => setErr(err.message));
 
 
 
@@ -75,9 +79,9 @@ const Registration = () => {
 
                             </div>
                             <label className="bg-white label label-text-alt pb-8 rounded-b-xl text-red-500">
-                                {/* {
+                                {
                                     err
-                                } */}
+                                }
                             </label>
                             <div className="form-control mt-6 gap-3">
                                 <button className="btn btn-primary">Register</button>
