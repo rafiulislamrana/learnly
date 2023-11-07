@@ -13,6 +13,7 @@ import UpdateAssignment from './components/pages/UpdateAssignment/UpdateAssignme
 import Login from './components/pages/Login/Login.jsx';
 import Registration from './components/pages/Registration/Registration.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
+import PrivateRoute from './routes/PrivateRoute/PrivateRoute.jsx';
 
 
 const router = createBrowserRouter([
@@ -31,11 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-assignment",
-        element: <AddAssigment></AddAssigment>
+        element: <PrivateRoute><AddAssigment></AddAssigment></PrivateRoute>
       },
       {
         path: "/update-assignment",
-        element: <UpdateAssignment></UpdateAssignment>
+        element: <PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>
       },
       {
         path: "/login",

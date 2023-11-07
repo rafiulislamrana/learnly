@@ -64,7 +64,8 @@ const AuthProvider = ({ children }) => {
         HandleGoogleRegi,
         HandleGoogle,
         err,
-        setErr
+        setErr,
+        loading
     }
     return (
         <AuthContext.Provider value={authInfo}>

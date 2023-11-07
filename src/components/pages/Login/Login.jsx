@@ -1,7 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
-// import { AuthContext } from "../../Providers/AuthProvide";
-// import { useContext } from "react";
 import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
