@@ -8,7 +8,9 @@ import { AuthContext } from "../../../providers/AuthProvider";
 
 const Registration = () => {
 
-    const { createUser, update, err, setErr } = useContext(AuthContext)
+    const { createUser, update, HandleGoogleRegi, err, setErr } = useContext(AuthContext)
+
+    const navigateUser = useNavigate()
 
     const handleRegistration = e => {
         e.preventDefault();
@@ -35,12 +37,20 @@ const Registration = () => {
                         .then(res => console.log(res))
                         .catch(err => console.log(err));
                 }
+
+                navigateUser("/")
             })
             .catch(err => setErr(err.message));
+    }
 
-
-
-
+    const googleRegi = () => {
+        HandleGoogleRegi()
+            .then(res => {
+                Swal.fire('Your Account Created Successfully!!');
+                console.log(res)
+                navigateUser("/")
+            })
+            .catch(err => console.error(err))
     }
 
     return (
@@ -88,8 +98,8 @@ const Registration = () => {
                             </div>
                         </form>
                         <div className="w-full px-8 bg-white">
-                        {/* onClick={HandleGoogleRegi} */}
-                            <button  className="btn btn-primary w-full"><AiOutlineGoogle className="text-2xl"></AiOutlineGoogle> Register with Google</button>
+                            
+                            <button onClick={googleRegi} className="btn btn-primary w-full"><AiOutlineGoogle className="text-2xl"></AiOutlineGoogle> Register with Google</button>
                         </div>
                         <label className="bg-white label label-text-alt px-8 pb-8 rounded-b-xl">
                             Already have an account?
