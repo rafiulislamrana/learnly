@@ -6,12 +6,14 @@ import AssignmentCard from "../Home/AssignmentCard";
 const Assignments = () => {
     const [assignment, setAssignment] = useState([]);
     const [count, setCount] = useState(0)
-    const [currentPage, setCurrentPage] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0);
+    const [sort, setSort] = useState("")
     const viewCount = 6;
 
-    const numOfPages = Math.ceil(count/viewCount)
+    const numOfPages = Math.ceil(count / viewCount)
 
-    const pages = [...Array(numOfPages).keys()];
+    let pages = [...Array(numOfPages).keys()];
+    
     console.log(pages)
 
     useEffect(() => {
@@ -19,10 +21,21 @@ const Assignments = () => {
             .then(res => {
                 setAssignment(res.data.reverse())
             })
-
+        
         axios.get("http://localhost:5000/assignment-count")
-        .then(res => setCount(res.data.count))
+            .then(res => setCount(res.data.count))
     }, [currentPage])
+
+    const handleSort = (e) => {
+        const value = e.target.value;
+        setSort(value)
+        
+        axios.get(`http://localhost:5000/assignmentsPage?sort=${value}`)
+        .then(res => {
+            setAssignment(res.data.reverse())
+        })
+        
+    }
     console.log(currentPage)
     return (
         <div>
@@ -36,7 +49,16 @@ const Assignments = () => {
                 </div>
             </div>
 
-            <div className="max-w-6xl mx-auto py-10">
+            <div className="py-10">
+                <select onChange={handleSort} className="select select-bordered w-full max-w-xs">
+                    <option disabled selected>Sort by Difficulty</option>
+                    <option>Easy</option>
+                    <option>Medium</option>
+                    <option>Hard</option>
+                </select>
+            </div>
+
+            <div className="max-w-6xl mx-auto ">
                 <div className="grid grid-cols-3 gap-5 ">
                     {
                         assignment.map(card => <AssignmentCard key={card._id} card={card}></AssignmentCard>)
@@ -44,6 +66,8 @@ const Assignments = () => {
                 </div>
                 <div className="flex gap-2 justify-center py-10">
                     {
+                        sort ? <></>
+                        :
                         pages.map((page, idx) => <button className="px-4 rounded py-1 bg-primary text-white" onClick={() => setCurrentPage(page)} key={idx}>{page + 1}</button>)
                     }
                 </div>
