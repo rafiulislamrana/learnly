@@ -1,32 +1,41 @@
+import axios from "axios";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const AddAssigment = () => {
     const [startDate, setStartDate] = useState(new Date());
-    const handleform = e => {
+    // const [dueDate, setDueDate] = useState("")
+    const handleform = (e) => {
         e.preventDefault();
 
+        console.log(startDate)
+        const formattedStartDate = startDate.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+          });
+        
+        console.log(formattedStartDate)
+        
+        
+        const dueDate = formattedStartDate
+        console.log( dueDate)
+
         const form = new FormData(e.currentTarget);
-        const name = form.get("name");
-        const brandname = form.get("brandname");
-        const price = form.get("price");
-        const rating = form.get("rating");
-        const type = form.get("type");
+        const title = form.get("title");
+        const difficulty = form.get("difficulty");
+        // const price = form.get("price");
+        const marks = form.get("marks");
+        const subject = form.get("subject");
         const description = form.get("description");
-        const photo = form.get("photo");
-        const newProduct = { name, brandname, price, rating, type, description, photo }
+        const imgURL = form.get("imgURL");
+        
+        
+        const newAssignment = { title, difficulty, dueDate, marks, subject, description, imgURL }
 
-
-        fetch('https://tastify-server.vercel.app/add-product', {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(newProduct)
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
+        axios.post("http://localhost:5000/assignments", newAssignment)
+        .then(res => res.data)
     }
 
     return (
@@ -39,13 +48,13 @@ const AddAssigment = () => {
                             <label className="label">
                                 <span className="label-text text-black ">Title</span>
                             </label>
-                            <input type="text" name="name" placeholder="Type here" className="input input-bordered w-full" />
+                            <input type="text" name="title" placeholder="Type here" className="input input-bordered w-full" />
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text text-black ">Difficulty</span>
                             </label>
-                            <select name="brandname" className="select select-bordered w-full">
+                            <select name="difficulty" className="select select-bordered w-full">
                                 <option disabled selected>What is the difficulty level?</option>
                                 <option>Easy</option>
                                 <option>Medium</option>
@@ -60,6 +69,7 @@ const AddAssigment = () => {
                             </label>
                             <DatePicker
                                 className="input input-bordered w-full "
+                                dateFormat="dd/MM/yyyy"
                                 selected={startDate}
                                 onChange={(date) => setStartDate(date)}
                             />
@@ -69,19 +79,19 @@ const AddAssigment = () => {
                             <label className="label">
                                 <span className="label-text text-black ">Marks</span>
                             </label>
-                            <input type="number" name="rating" placeholder="Type here" className="input input-bordered w-full " />
+                            <input type="number" name="marks" placeholder="Type here" className="input input-bordered w-full " />
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text text-black ">Subject</span>
                             </label>
-                            <input type="text" name="type" placeholder="Type here" className="input input-bordered w-full " />
+                            <input type="text" name="subject" placeholder="Type here" className="input input-bordered w-full " />
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text text-black ">Thumbnail Image URL</span>
                             </label>
-                            <input type="text" name="photo" placeholder="Type here" className="input input-bordered w-full " />
+                            <input type="text" name="imgURL" placeholder="Type here" className="input input-bordered w-full " />
                         </div>
                         <div className="form-control w-full col-span-2">
                             <label className="label">
