@@ -43,13 +43,13 @@ const Assignments = () => {
                 <div className="max-w-6xl mx-auto">
                     <div className=" py-20 items-center">
                         <div className="">
-                            <h1 className=" text-white font-extrabold font-space text-6xl">All Assignments</h1>
+                            <h1 className=" text-white font-extrabold font-space text-4xl md:text-6xl">All Assignments</h1>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="py-10">
+            <div className="py-10 mx-3 lg:mx-auto">
                 <select onChange={handleSort} className="select select-bordered w-full max-w-xs">
                     <option disabled selected>Sort by Difficulty</option>
                     <option>Easy</option>
@@ -58,8 +58,8 @@ const Assignments = () => {
                 </select>
             </div>
 
-            <div className="max-w-6xl mx-auto ">
-                <div className="grid grid-cols-3 gap-5 ">
+            <div className="max-w-6xl mx-3 lg:mx-auto ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
                     {
                         assignment.map(card => <AssignmentCard key={card._id} card={card}></AssignmentCard>)
                     }

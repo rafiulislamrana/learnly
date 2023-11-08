@@ -1,8 +1,14 @@
-# React + Vite
+# Learnly
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Learnly: Your hub for collaborative learning. Connect with peers and mentors in over 100 courses. Study together, share knowledge, and conquer assignments. Join Learnly to supercharge your academic journey with collaborative success!
 
-Currently, two official plugins are available:
+Live Link: https://tastify-a4411.web.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Five different features and functionalities of my website:
+
+- Private Route for single assignment page
+- paginitations
+- Password validation
+- Username and photo on the header
+- Redirect user to the previous route or homepage after login
+- Sorting assignments

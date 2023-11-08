@@ -17,6 +17,9 @@ import PrivateRoute from './routes/PrivateRoute/PrivateRoute.jsx';
 import SingleAssignment from './components/pages/SingleAssignmenta/SingleAssignment.jsx';
 import Assignments from './components/pages/Assignments/Assignments.jsx';
 import MyAssignments from './components/pages/MyAssignments/MyAssignments.jsx';
+import SubmitAssignment from './components/pages/SubmitAssignment/SubmitAssignment.jsx';
+import AllSubmittedAssignments from './components/pages/AllSubmittedAssignments/AllSubmittedAssignments.jsx';
+import SinglePendingAssignments from './components/pages/SinglePendingAssignments/SinglePendingAssignments.jsx';
 
 
 const router = createBrowserRouter([
@@ -57,6 +60,20 @@ const router = createBrowserRouter([
       {
         path: "/assignment/:id",
         element: <PrivateRoute><SingleAssignment></SingleAssignment></PrivateRoute>
+      },
+      {
+        path: "/submit/:id",
+        element: <PrivateRoute><SubmitAssignment></SubmitAssignment></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/assignment/${params.id}`)
+      },
+      {
+        path: "/all-submitted-assignments",
+        element: <PrivateRoute><AllSubmittedAssignments></AllSubmittedAssignments></PrivateRoute>
+      },
+      {
+        path: "/pending-assignments/:id",
+        element: <PrivateRoute><SinglePendingAssignments></SinglePendingAssignments></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/pending-assignments/${params.id}`)
       }
     ]
   },

@@ -57,6 +57,8 @@ const Header = () => {
                                     <Link to="/my-assignments" className=" hover:text-primary" ><li>My Assignments</li></Link>
 
                                     <Link to="/assignments" className=" hover:text-primary" ><li>All Assignments</li></Link>
+
+                                    <Link to="/all-submitted-assignments" className=" hover:text-primary" ><li>Submitted Assignments</li></Link>
                                 </div>
 
                                 <hr />
@@ -79,8 +81,8 @@ const Header = () => {
                             :
 
                             <div className="flex gap-3 items-center">
-                                <Link to="/login"><button className="text-md px-3 py-2 text-black font-space">Log In</button></Link>
-                                <Link to="/registration"><button className="text-md bg-primary px-5 py-2 rounded-3xl text-white font-space">Register</button></Link>
+                                <Link className=" hidden md:inline-block" to="/login"><button className="text-md px-3 py-2 text-black font-space">Log In</button></Link>
+                                <Link className=" hidden md:inline-block" to="/registration"><button className="text-md bg-primary px-5 py-2 rounded-3xl text-white font-space">Register</button></Link>
                                 <div className="dropdown dropdown-end z-10">
                                     <label tabIndex={0} className="btn btn-ghost btn-circle">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-black" fill="nonb" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
@@ -88,6 +90,10 @@ const Header = () => {
                                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow bg-white text-black rounded-box w-52 text-left">
 
                                         <div className="flex flex-col gap-3 pb-2">
+                                            <Link to="/login" className=" hover:text-primary md:hidden" ><li>Log In</li></Link>
+
+                                            <Link to="/registration" className=" hover:text-primary md:hidden" ><li>Register</li></Link>
+
                                             <Link to="/add-assignment" className=" hover:text-primary" ><li>Create Assignment</li></Link>
 
                                             <Link to="/assignments" className=" hover:text-primary" ><li>All Assignments</li></Link>
