@@ -32,8 +32,8 @@ const AddAssigment = () => {
         const imgURL = form.get("imgURL");
         
         
-        const newAssignment = { title, difficulty, dueDate, marks, subject, description, imgURL }
-
+        const newAssignment = { title, difficulty, dueDate, startDate, marks, subject, description, imgURL }
+          console.log (newAssignment)
         axios.post("http://localhost:5000/assignments", newAssignment)
         .then(res => res.data)
     }

@@ -43,7 +43,7 @@ const SingleAssignment = () => {
                         </div>
                         <div className="flex flex-col gap-3 ">
                             <Link to="/registration"><button className="text-lg w-full bg-primary px-5 py-2 rounded text-white font-space">Take the Assignment</button></Link>
-                            <Link to="/registration"><button className="text-lg border-primary border px-5 py-2 rounded text-primary font-space w-full">Update Assignment</button></Link>
+                            <Link to={`/update-assignment/${_id}`}><button className="text-lg border-primary border px-5 py-2 rounded text-primary font-space w-full">Update Assignment</button></Link>
                             <Link to="/registration"><button className="text-lg bg-red-600 px-5 py-2 rounded text-white font-space w-full">Delete Assignment</button></Link>
                         </div>
                     </div>

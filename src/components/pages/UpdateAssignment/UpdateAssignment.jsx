@@ -1,33 +1,47 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useLoaderData, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const UpdateAssignment = () => {
-    const [startDate, setStartDate] = useState(new Date());
+    const updateProd = useLoaderData()
+    const [startDate, setStartDate] = useState(new Date(updateProd.startDate));
+    const assignmenId = useParams()
+    console.log(assignmenId)
+
+
     const handleform = e => {
         e.preventDefault();
 
         const form = new FormData(e.currentTarget);
-        const name = form.get("name");
-        const brandname = form.get("brandname");
-        const price = form.get("price");
-        const rating = form.get("rating");
-        const type = form.get("type");
+        const title = form.get("title");
+        const difficulty = form.get("difficulty");
+        const marks = form.get("marks");
+        const subject = form.get("subject");
         const description = form.get("description");
-        const photo = form.get("photo");
-        const newProduct = { name, brandname, price, rating, type, description, photo }
+        const imgURL = form.get("imgURL")
+        console.log(difficulty)
+
+        // const newAssignment = { title, difficulty, dueDate, marks, subject, description, imgURL }
 
 
-        fetch('https://tastify-server.vercel.app/add-product', {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(newProduct)
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
+        // fetch(`https://tastify-server.vercel.app/update/${prodId.id}`, {
+        //     method: "PUT",
+        //     headers: {
+        //         "content-type": "application/json"
+        //     },
+        //     body: JSON.stringify(updateProduct)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.modifiedCount == 1) {
+        //             Swal.fire('Product Updated Succesfully!');
+        //         }
+        //         console.log(data)
+        //     })
     }
     return (
         <div>
@@ -39,19 +53,20 @@ const UpdateAssignment = () => {
                             <label className="label">
                                 <span className="label-text text-black ">Title</span>
                             </label>
-                            <input type="text" name="name" placeholder="Type here" className="input input-bordered w-full" />
+                            <input type="text" defaultValue={updateProd.title} name="title" placeholder="Type here" className="input input-bordered w-full" />
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text text-black ">Difficulty</span>
                             </label>
-                            <select name="brandname" className="select select-bordered w-full">
+
+                            <select defaultValue={updateProd.difficulty} name="difficulty" className="select select-bordered w-full">
                                 <option disabled selected>What is the difficulty level?</option>
                                 <option>Easy</option>
                                 <option>Medium</option>
                                 <option>Hard</option>
                             </select>
-                            {/* <input type="text" name="brandname" placeholder="Type here" className="input input-bordered w-full " /> */}
+                            
                         </div>
                         <div className="form-control w-full ">
 
@@ -59,7 +74,9 @@ const UpdateAssignment = () => {
                                 <span className="label-text text-black ">Due Date</span>
                             </label>
                             <DatePicker
+                                
                                 className="input input-bordered w-full "
+                                dateFormat="dd/MM/yyyy"
                                 selected={startDate}
                                 onChange={(date) => setStartDate(date)}
                             />
@@ -69,25 +86,25 @@ const UpdateAssignment = () => {
                             <label className="label">
                                 <span className="label-text text-black ">Marks</span>
                             </label>
-                            <input type="number" name="rating" placeholder="Type here" className="input input-bordered w-full " />
+                            <input defaultValue={updateProd.marks} type="number" name="marks" placeholder="Type here" className="input input-bordered w-full " />
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text text-black ">Subject</span>
                             </label>
-                            <input type="text" name="type" placeholder="Type here" className="input input-bordered w-full " />
+                            <input defaultValue={updateProd.subject} type="text" name="subject" placeholder="Type here" className="input input-bordered w-full " />
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text text-black ">Thumbnail Image URL</span>
                             </label>
-                            <input type="text" name="photo" placeholder="Type here" className="input input-bordered w-full " />
+                            <input defaultValue={updateProd.imgURL} type="text" name="imgURL" placeholder="Type here" className="input input-bordered w-full " />
                         </div>
                         <div className="form-control w-full col-span-2">
                             <label className="label">
                                 <span className="label-text text-black ">Description</span>
                             </label>
-                            <textarea style={{ height: '150px' }} className="input input-bordered pt-3" name="description" id="" cols="30" rows="10"></textarea>
+                            <textarea defaultValue={updateProd.description} style={{ height: '150px' }} className="input input-bordered pt-3" name="description" id="" cols="30" rows="10"></textarea>
                         </div>
 
 
