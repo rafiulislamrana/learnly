@@ -1,14 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const AddAssigment = () => {
+    const {user} = useContext(AuthContext)
     const [startDate, setStartDate] = useState(new Date());
-    // const [dueDate, setDueDate] = useState("")
     const navigation = useNavigate()
+    console.log(user)
     const handleform = (e) => {
         e.preventDefault();
 
@@ -35,13 +37,13 @@ const AddAssigment = () => {
         const imgURL = form.get("imgURL");
         
         
-        const newAssignment = { title, difficulty, dueDate, startDate, marks, subject, description, imgURL }
+        const newAssignment = { title, difficulty, dueDate, startDate, marks, subject, description, imgURL, email: user.email }
           console.log (newAssignment)
         axios.post("http://localhost:5000/assignments", newAssignment)
         .then(res => {
             Swal.fire("New Assignment added successfully!")
             .then((result) => {
-                /* Read more about isConfirmed, isDenied below */
+                
                 if (result.isConfirmed) {
                     navigation("/assignments")
                 }

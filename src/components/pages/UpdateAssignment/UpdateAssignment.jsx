@@ -25,10 +25,31 @@ const UpdateAssignment = () => {
         const imgURL = form.get("imgURL")
         console.log(difficulty)
 
-        // const newAssignment = { title, difficulty, dueDate, marks, subject, description, imgURL }
+        const formattedStartDate = startDate.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+          });
+        
+        console.log(formattedStartDate)
+        
+        
+        const dueDate = formattedStartDate
+
+        const newAssignment = { title, difficulty, dueDate, startDate, marks, subject, description, imgURL, email: updateProd.email }
 
 
-        // fetch(`https://tastify-server.vercel.app/update/${prodId.id}`, {
+        axios.put(`http://localhost:5000/update-assignment/${updateProd._id}`, newAssignment)
+        .then(res => {
+            
+                Swal.fire("Assignment Updated successfully!")
+                
+                 
+                console.log(res.data)
+            
+        })
+
+        // fetch(`https://tastify-server.vercel.app/update-assignment/${prodId.id}`, {
         //     method: "PUT",
         //     headers: {
         //         "content-type": "application/json"

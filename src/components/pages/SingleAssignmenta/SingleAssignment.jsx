@@ -1,33 +1,62 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 
 const SingleAssignment = () => {
+    const { user } = useContext(AuthContext)
     const [singleAss, setSingleAss] = useState([])
     const id = useParams()
-    const navigation = useNavigate()
+    const navigateUser = useNavigate()
     const { title, description, imgURL, marks, difficulty, subject, dueDate, _id } = singleAss;
     useEffect(() => {
         axios.get(`http://localhost:5000/assignment/${id.id}`)
             .then(res => setSingleAss(res.data))
     }, [])
+    console.log(singleAss)
 
-    const handleDelete = (id) => {
-        axios.delete(`http://localhost:5000/assignment/${id}`)
-        .then(res => {
-            console.log(res.data)
-            Swal.fire("Assignment deleted successfully!")
+    const handleUpdate = (id) => {
+        
+        if (singleAss.email == user.email) {
+            console.log("Clicking")
+            
+            Swal.fire({title:"Are you want to update this assignment?",
+            confirmButtonText: "Yes"})
             .then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    navigation("/assignments")
+                    navigateUser(`/update-assignment/${id}`)
                 }
-                }
-              )
-            
-        })
+            })
+        }
+        else {
+            Swal.fire("You cant update this Assignment")
+        }
+    }
+
+    const handleDelete = (id) => {
+        if (singleAss.email == user.email) {
+            axios.delete(`http://localhost:5000/assignment/${id}`)
+                .then(res => {
+                    console.log(res.data)
+                    Swal.fire("Assignment deleted successfully!")
+                        .then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                navigateUser("/assignments")
+                            }
+                        }
+                        )
+
+                })
+        }
+        else {
+            Swal.fire("You cant delete this Assignment")
+        }
+
+
     }
 
 
@@ -63,8 +92,8 @@ const SingleAssignment = () => {
                         </div>
                         <div className="flex flex-col gap-3 ">
                             <Link to="/registration"><button className="text-lg w-full bg-primary px-5 py-2 rounded text-white font-space">Take the Assignment</button></Link>
-                            <Link to={`/update-assignment/${_id}`}><button className="text-lg border-primary border px-5 py-2 rounded text-primary font-space w-full">Update Assignment</button></Link>
-                            <Link onClick={() => handleDelete(_id)} to={"/assignments"}><button className="text-lg bg-red-600 px-5 py-2 rounded text-white font-space w-full">Delete Assignment</button></Link>
+                            <Link onClick={() => handleUpdate(_id)}><button className="text-lg border-primary border px-5 py-2 rounded text-primary font-space w-full">Update Assignment</button></Link>
+                            <Link onClick={() => handleDelete(_id)}><button className="text-lg bg-red-600 px-5 py-2 rounded text-white font-space w-full">Delete Assignment</button></Link>
                         </div>
                     </div>
                 </div>
