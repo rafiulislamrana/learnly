@@ -2,10 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddAssigment = () => {
     const [startDate, setStartDate] = useState(new Date());
     // const [dueDate, setDueDate] = useState("")
+    const navigation = useNavigate()
     const handleform = (e) => {
         e.preventDefault();
 
@@ -35,7 +38,17 @@ const AddAssigment = () => {
         const newAssignment = { title, difficulty, dueDate, startDate, marks, subject, description, imgURL }
           console.log (newAssignment)
         axios.post("http://localhost:5000/assignments", newAssignment)
-        .then(res => res.data)
+        .then(res => {
+            Swal.fire("New Assignment added successfully!")
+            .then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    navigation("/assignments")
+                }
+                }
+              )
+            console.log(res.data)
+        })
     }
 
     return (
