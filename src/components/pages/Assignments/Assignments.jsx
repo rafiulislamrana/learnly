@@ -61,11 +61,11 @@ const Assignments = () => {
                         assignment.map(card => <AssignmentCard key={card._id} card={card}></AssignmentCard>)
                     }
                 </div>
-                <div className="flex gap-2 justify-center py-10">
+                <div className="flex gap-2 justify-center py-10 pagination">
                     {
                         sort ? <></>
                         :
-                        pages.map((page, idx) => <button className="px-4 rounded py-1 bg-primary text-white" onClick={() => setCurrentPage(page)} key={idx}>{page + 1}</button>)
+                        pages.map((page, idx) => <button className={currentPage == page? "selected px-4 rounded py-1 bg-primary text-white" : "px-4 rounded py-1 bg-primary text-white"} onClick={() => setCurrentPage(page)} key={idx}>{page + 1}</button>)
                     }
                 </div>
             </div>

@@ -11,3 +11,7 @@
 #root {
   padding: 0;
 }
+
+.pagination .selected{
+  background-color: orange;
+}
