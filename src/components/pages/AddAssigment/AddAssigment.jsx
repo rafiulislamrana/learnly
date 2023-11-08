@@ -10,22 +10,16 @@ const AddAssigment = () => {
     const {user} = useContext(AuthContext)
     const [startDate, setStartDate] = useState(new Date());
     const navigation = useNavigate()
-    console.log(user)
     const handleform = (e) => {
         e.preventDefault();
-
-        console.log(startDate)
         const formattedStartDate = startDate.toLocaleDateString('en-GB', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric'
           });
         
-        console.log(formattedStartDate)
-        
-        
         const dueDate = formattedStartDate
-        console.log( dueDate)
+
 
         const form = new FormData(e.currentTarget);
         const title = form.get("title");
@@ -38,8 +32,8 @@ const AddAssigment = () => {
         
         
         const newAssignment = { title, difficulty, dueDate, startDate, marks, subject, description, imgURL, email: user.email }
-          console.log (newAssignment)
-        axios.post("http://localhost:5000/assignments", newAssignment)
+
+        axios.post("https://learnly-server.vercel.app/assignments", newAssignment)
         .then(res => {
             Swal.fire("New Assignment added successfully!")
             .then((result) => {

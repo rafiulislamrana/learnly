@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       {
         path: "/update-assignment/:id",
         element: <PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/assignment/${params.id}`)
+        loader: ({params}) => fetch(`https://learnly-server.vercel.app/assignment/${params.id}`)
       },
       {
         path: "/login",
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       {
         path: "/submit/:id",
         element: <PrivateRoute><SubmitAssignment></SubmitAssignment></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/assignment/${params.id}`)
+        loader: ({params}) => fetch(`https://learnly-server.vercel.app/assignment/${params.id}`)
       },
       {
         path: "/all-submitted-assignments",
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
       {
         path: "/pending-assignments/:id",
         element: <PrivateRoute><SinglePendingAssignments></SinglePendingAssignments></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/pending-assignments/${params.id}`)
+        loader: ({params}) => fetch(`https://learnly-server.vercel.app/pending-assignments/${params.id}`)
       }
     ]
   },

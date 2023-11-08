@@ -10,7 +10,6 @@ const SubmitAssignment = () => {
     const navigation = useNavigate()
     const assignmenId = useParams()
     const submitting = useLoaderData()
-    console.log(submitting)
 
     const handleform = (e) => {
         e.preventDefault();
@@ -22,7 +21,7 @@ const SubmitAssignment = () => {
         
         const submitAssignment = { title: submitting.title, description, marks: submitting.marks, PDFURL, email: user.email, name: user.displayName, status: "pending", assignmentId:  assignmenId.id}
 
-        axios.post("http://localhost:5000/submit-assignments", submitAssignment)
+        axios.post("https://learnly-server.vercel.app/submit-assignments", submitAssignment)
         .then(res => {
             Swal.fire("Assignment submitted successfully!")
             .then((result) => {

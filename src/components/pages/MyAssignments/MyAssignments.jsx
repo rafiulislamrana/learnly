@@ -8,7 +8,7 @@ const MyAssignments = () => {
     const [assignment, setAssignment] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/my-assignments?email=${user.email}`, {
+        axios.get(`https://learnly-server.vercel.app/my-assignments?email=${user.email}`, {
             withCredentials: true
         })
             .then(res => {

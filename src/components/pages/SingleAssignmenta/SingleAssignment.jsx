@@ -12,15 +12,15 @@ const SingleAssignment = () => {
     const navigateUser = useNavigate()
     const { title, description, imgURL, marks, difficulty, subject, dueDate, _id } = singleAss;
     useEffect(() => {
-        axios.get(`http://localhost:5000/assignment/${id.id}`)
+        axios.get(`https://learnly-server.vercel.app/assignment/${id.id}`)
             .then(res => setSingleAss(res.data))
     }, [])
-    console.log(singleAss)
+
 
     const handleUpdate = (id) => {
         
         if (singleAss.email == user.email) {
-            console.log("Clicking")
+  
             
             Swal.fire({title:"Are you want to update this assignment?",
             confirmButtonText: "Yes"})
@@ -38,7 +38,7 @@ const SingleAssignment = () => {
 
     const handleDelete = (id) => {
         if (singleAss.email == user.email) {
-            axios.delete(`http://localhost:5000/assignment/${id}`, {withCredentials: true})
+            axios.delete(`https://learnly-server.vercel.app/assignment/${id}`, {withCredentials: true})
                 .then(res => {
                     console.log(res.data)
                     Swal.fire("Assignment deleted successfully!")
@@ -58,9 +58,6 @@ const SingleAssignment = () => {
 
 
     }
-
-
-    console.log(singleAss)
     return (
         <div>
             <div className="bg-primary">

@@ -7,13 +7,12 @@ import { Link } from "react-router-dom";
 const Home = () => {
     const [assignment, setAssignment] = useState([])
     useEffect(() => {
-        axios.get("http://localhost:5000/assignments")
+        axios.get("https://learnly-server.vercel.app/assignments")
             .then(res => {
                 setAssignment(res.data.reverse().slice(0,3))
             })
     }, [])
 
-    console.log(assignment)
     return (
         <div>
             <div className="bg-primary">

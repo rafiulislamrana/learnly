@@ -15,7 +15,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const SinglePendingAssignments = () => {
     const {user} = useContext(AuthContext)
     const pending = useLoaderData()
-    console.log(pending)
     const navigation = useNavigate()
     const assignmenId = useParams()
 
@@ -29,7 +28,7 @@ const SinglePendingAssignments = () => {
         
         const updateAssignment = { title: pending.title, description: pending.description, marks: pending.marks, PDFURL: pending.PDFURL, email: user.email, name: user.displayName, status: "complete", assignmentId:  assignmenId.id}
 
-        axios.put(`http://localhost:5000/submit-assignments/${pending._id}`, updateAssignment)
+        axios.put(`https://learnly-server.vercel.app/submit-assignments/${pending._id}`, updateAssignment)
         .then(res => {
             Swal.fire("Student received mark and feedback successfully!")
             .then((result) => {

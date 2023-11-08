@@ -13,16 +13,14 @@ const Assignments = () => {
     const numOfPages = Math.ceil(count / viewCount)
 
     let pages = [...Array(numOfPages).keys()];
-    
-    console.log(pages)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/assignmentsPage?page=${currentPage}&size=${viewCount}`)
+        axios.get(`https://learnly-server.vercel.app/assignmentsPage?page=${currentPage}&size=${viewCount}`)
             .then(res => {
                 setAssignment(res.data.reverse())
             })
         
-        axios.get("http://localhost:5000/assignment-count")
+        axios.get("https://learnly-server.vercel.app/assignment-count")
             .then(res => setCount(res.data.count))
     }, [currentPage])
 
@@ -30,13 +28,12 @@ const Assignments = () => {
         const value = e.target.value;
         setSort(value)
         
-        axios.get(`http://localhost:5000/assignmentsPage?sort=${value}`)
+        axios.get(`https://learnly-server.vercel.app/assignmentsPage?sort=${value}`)
         .then(res => {
             setAssignment(res.data.reverse())
         })
         
     }
-    console.log(currentPage)
     return (
         <div>
             <div className="bg-primary">

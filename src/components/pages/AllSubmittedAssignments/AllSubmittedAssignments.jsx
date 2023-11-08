@@ -1,5 +1,4 @@
 import axios from "axios";
-import AssignmentCard from "../Home/AssignmentCard";
 import { useEffect, useState } from "react";
 import AssignmentList from "./AssignmentList";
 
@@ -8,12 +7,11 @@ const AllSubmittedAssignments = () => {
     const [assignment, setAssignment] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/submit-assignments?status=pending`)
+        axios.get(`https://learnly-server.vercel.app/submit-assignments?status=pending`)
             .then(res => {
                 setAssignment(res.data)
             })
     }, [])
-    console.log(assignment)
 
     return (
         <div>

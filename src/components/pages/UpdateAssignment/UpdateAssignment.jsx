@@ -1,16 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
 const UpdateAssignment = () => {
     const updateProd = useLoaderData()
     const [startDate, setStartDate] = useState(new Date(updateProd.startDate));
-    const assignmenId = useParams()
-    console.log(assignmenId)
 
 
     const handleform = e => {
@@ -23,7 +21,7 @@ const UpdateAssignment = () => {
         const subject = form.get("subject");
         const description = form.get("description");
         const imgURL = form.get("imgURL")
-        console.log(difficulty)
+
 
         const formattedStartDate = startDate.toLocaleDateString('en-GB', {
             day: '2-digit',
@@ -31,15 +29,13 @@ const UpdateAssignment = () => {
             year: 'numeric'
           });
         
-        console.log(formattedStartDate)
-        
         
         const dueDate = formattedStartDate
 
         const newAssignment = { title, difficulty, dueDate, startDate, marks, subject, description, imgURL, email: updateProd.email }
 
 
-        axios.put(`http://localhost:5000/update-assignment/${updateProd._id}`, newAssignment)
+        axios.put(`https://learnly-server.vercel.app/update-assignment/${updateProd._id}`, newAssignment)
         .then(res => {
             
                 Swal.fire("Assignment Updated successfully!")
@@ -48,21 +44,6 @@ const UpdateAssignment = () => {
                 console.log(res.data)
             
         })
-
-        // fetch(`https://tastify-server.vercel.app/update-assignment/${prodId.id}`, {
-        //     method: "PUT",
-        //     headers: {
-        //         "content-type": "application/json"
-        //     },
-        //     body: JSON.stringify(updateProduct)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.modifiedCount == 1) {
-        //             Swal.fire('Product Updated Succesfully!');
-        //         }
-        //         console.log(data)
-        //     })
     }
     return (
         <div>
