@@ -20,6 +20,7 @@ import MyAssignments from './components/pages/MyAssignments/MyAssignments.jsx';
 import SubmitAssignment from './components/pages/SubmitAssignment/SubmitAssignment.jsx';
 import AllSubmittedAssignments from './components/pages/AllSubmittedAssignments/AllSubmittedAssignments.jsx';
 import SinglePendingAssignments from './components/pages/SinglePendingAssignments/SinglePendingAssignments.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 const router = createBrowserRouter([
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
       {
         path: "/update-assignment/:id",
         element: <PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>,
-        loader: ({params}) => fetch(`https://learnly-server.vercel.app/assignment/${params.id}`)
+        loader: ({ params }) => fetch(`https://learnly-server.vercel.app/assignment/${params.id}`)
       },
       {
         path: "/login",
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
       {
         path: "/submit/:id",
         element: <PrivateRoute><SubmitAssignment></SubmitAssignment></PrivateRoute>,
-        loader: ({params}) => fetch(`https://learnly-server.vercel.app/assignment/${params.id}`)
+        loader: ({ params }) => fetch(`https://learnly-server.vercel.app/assignment/${params.id}`)
       },
       {
         path: "/all-submitted-assignments",
@@ -73,16 +74,20 @@ const router = createBrowserRouter([
       {
         path: "/pending-assignments/:id",
         element: <PrivateRoute><SinglePendingAssignments></SinglePendingAssignments></PrivateRoute>,
-        loader: ({params}) => fetch(`https://learnly-server.vercel.app/pending-assignments/${params.id}`)
+        loader: ({ params }) => fetch(`https://learnly-server.vercel.app/pending-assignments/${params.id}`)
       }
     ]
   },
 ]);
 
+const queryClient = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider> 
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )

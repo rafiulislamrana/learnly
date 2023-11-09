@@ -1,6 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AssignmentCard from "../Home/AssignmentCard";
+import { useQuery } from "@tanstack/react-query";
+
 
 
 const Assignments = () => {
@@ -14,25 +16,73 @@ const Assignments = () => {
 
     let pages = [...Array(numOfPages).keys()];
 
-    useEffect(() => {
-        axios.get(`https://learnly-server.vercel.app/assignmentsPage?page=${currentPage}&size=${viewCount}`)
-            .then(res => {
-                setAssignment(res.data.reverse())
-            })
-        
-        axios.get("https://learnly-server.vercel.app/assignment-count")
-            .then(res => setCount(res.data.count))
-    }, [currentPage])
+    const assQuery = useQuery({
+        queryKey: ['ass', currentPage], queryFn: () => {
+            axios.get(`https://learnly-server.vercel.app/assignmentsPage?page=${currentPage}&size=${viewCount}`)
+                .then(res => {
+                    setAssignment(res.data.reverse())
+                    return res.data;
+                })
+
+
+        }
+    })
+    const countQuery = useQuery({
+        queryKey: ['count'], queryFn: () => {
+            axios.get("https://learnly-server.vercel.app/assignment-count")
+                .then(res => {
+                    setCount(res.data.count)
+                    return res.data;
+                })
+
+
+        }
+    })
+
+    console.log(countQuery, assQuery)
+
+    // useEffect(() => {
+    //     axios.get(`https://learnly-server.vercel.app/assignmentsPage?page=${currentPage}&size=${viewCount}`)
+    //         .then(res => {
+
+    //             setAssignment(res.data.reverse())
+
+
+
+    //         })
+    // }, [currentPage])
+
+    // const { isPending, error, data } = useQuery({
+    //     queryKey: ['assignmentCount'],
+    // queryFn: () => {
+    //     axios.get("https://learnly-server.vercel.app/assignment-count")
+    //         .then(res => {
+    //             setCount(res.data.count)
+    //             return res.data;
+    //         })
+
+
+    // }
+
+    // })
+
+    // if (isPending) return 'Loading...'
+
+    // if (error) return 'An error has occurred: ' + error.message
+
+    // console.log(data)
+
+
 
     const handleSort = (e) => {
         const value = e.target.value;
         setSort(value)
-        
+
         axios.get(`https://learnly-server.vercel.app/assignmentsPage?sort=${value}`)
-        .then(res => {
-            setAssignment(res.data.reverse())
-        })
-        
+            .then(res => {
+                setAssignment(res.data.reverse())
+            })
+
     }
     return (
         <div>
@@ -64,8 +114,8 @@ const Assignments = () => {
                 <div className="flex gap-2 justify-center py-10 pagination">
                     {
                         sort ? <></>
-                        :
-                        pages.map((page, idx) => <button className={currentPage == page? "selected px-4 rounded py-1 bg-primary text-white" : "px-4 rounded py-1 bg-primary text-white"} onClick={() => setCurrentPage(page)} key={idx}>{page + 1}</button>)
+                            :
+                            pages.map((page, idx) => <button className={currentPage == page ? "selected px-4 rounded py-1 bg-primary text-white" : "px-4 rounded py-1 bg-primary text-white"} onClick={() => setCurrentPage(page)} key={idx}>{page + 1}</button>)
                     }
                 </div>
             </div>
