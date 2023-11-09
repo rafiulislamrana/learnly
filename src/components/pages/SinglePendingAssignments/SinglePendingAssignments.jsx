@@ -59,7 +59,8 @@ const SinglePendingAssignments = () => {
                 <div className="max-w-6xl mx-auto py-10">
                     <div className="text-center">
                         <h4 className="card-title justify-center font-space text-xl">PDF Link</h4>
-                        <Link to={pending.PDFURL} className="text-primary underline text-[8px] md:text-base">{pending.PDFURL}</Link>
+                        <a href=""></a>
+                        <Link to={pending.PDFURL} className="text-primary underline break-words md:text-base">{pending.PDFURL}</Link>
                         <Document file={pending.PDFURL} />
                     </div>
 
