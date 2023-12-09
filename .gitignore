@@ -1,0 +1,29 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+
+learnly-client/node_modules
+learnly-client/dist
+learnly-client/dist-ssr
+learnly-client/*.local
+
+# Editor directories and files
+learnly-client/.vscode/*
+tastify-client/!.vscode/extensions.json
+tastify-client/.idea
+tastify-client/.DS_Store
+tastify-client/*.suo
+tastify-client/*.ntvs*
+tastify-client/*.njsproj
+tastify-client/*.sln
+tastify-client/*.sw?
+
+learnly-server/node_modules
+learnly-server/.env
+learnly-server/.vercel
